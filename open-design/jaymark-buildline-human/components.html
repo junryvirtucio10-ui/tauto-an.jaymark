@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jaymark Buildline — human revision</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <style>
+      @font-face { font-family: "Archivo"; src: url("./fonts/Archivo-Variable.ttf") format("truetype"); font-style: normal; font-weight: 400 800; font-stretch: 75% 125%; font-display: swap; }
+      @font-face { font-family: "Atkinson Hyperlegible Next"; src: url("./fonts/AtkinsonHyperlegibleNext-Variable.ttf") format("truetype"); font-style: normal; font-weight: 400 700; font-display: swap; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("./fonts/IBMPlexMono-Medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-body); }
+      button, a { color: inherit; font: inherit; }
+      a { text-decoration: none; }
+      button { cursor: pointer; }
+      :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+      .shell { width: min(var(--container-max), calc(100vw - 64px)); margin-inline: auto; }
+      .header { border-bottom: 1px solid var(--border); background: rgba(244,246,247,.92); }
+      .header-inner { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { font-family: var(--font-display); font-variation-settings: "wdth" 112; font-weight: 720; letter-spacing: -.025em; }
+      .header nav { display: flex; align-items: center; gap: 24px; font-size: var(--text-sm); }
+      .header nav a:not(.button):hover { color: var(--accent); }
+      .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 12px; padding: 0 20px; border: 1px solid var(--fg); border-radius: var(--radius-control); background: transparent; font-weight: 700; }
+      .button-primary { border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
+      .button .arrow { transition: transform var(--motion-fast) var(--ease-standard); }
+      .button:hover .arrow { transform: translateX(4px); }
+      .layout { display: grid; grid-template-columns: var(--rail-width) minmax(0, 1fr); gap: 56px; }
+      .rail { padding-top: 10px; border-top: 3px solid var(--signal); color: var(--muted); font-size: var(--text-sm); }
+      .rail strong { display: block; margin-bottom: 8px; color: var(--fg); }
+      .hero { padding: 88px 0 var(--section-y-desktop); }
+      .hero-copy { max-width: 960px; }
+      .eyebrow { margin: 0 0 20px; color: var(--accent); font-size: var(--text-sm); font-weight: 700; }
+      h1, h2, h3 { margin: 0; font-family: var(--font-display); font-variation-settings: "wdth" 108; }
+      h1 { max-width: 920px; font-size: var(--text-4xl); font-weight: 680; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); }
+      .lede { max-width: 640px; margin: 28px 0 0; color: var(--fg-2); font-size: var(--text-lg); }
+      .actions { display: flex; gap: 12px; margin-top: 32px; }
+      .workbench { margin-top: 72px; }
+      .workbench-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 18px; }
+      .workbench-head h2 { max-width: 680px; font-size: clamp(2rem,4vw,3.6rem); line-height: 1.03; }
+      .viewport-controls { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--surface); }
+      .viewport-control { min-height: 42px; padding: 0 14px; border: 0; border-radius: 3px; background: transparent; color: var(--muted); font-size: var(--text-sm); font-weight: 700; }
+      .viewport-control[aria-pressed="true"] { background: var(--fg); color: #fff; }
+      .stage { display: grid; min-height: 560px; place-items: center; padding: 42px; border: 1px solid var(--border); background: #e7edf0; }
+      .browser { overflow: hidden; width: min(100%, 980px); border: 1px solid #9ba8b4; border-radius: var(--radius-frame); background: var(--surface); box-shadow: var(--elev-frame); transition: width var(--motion-frame) var(--ease-standard); }
+      .browser[data-viewport="tablet"] { width: min(72%, 700px); }
+      .browser[data-viewport="mobile"] { width: min(42%, 390px); }
+      .browser-bar { display: flex; height: 42px; align-items: center; gap: 7px; padding: 0 14px; border-bottom: 1px solid var(--border); }
+      .browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+      .browser-bar i:first-child { background: var(--signal); }
+      .demo-page { display: grid; min-height: 390px; grid-template-columns: 1.1fr .9fr; }
+      .demo-copy { display: flex; padding: 42px; justify-content: center; flex-direction: column; }
+      .demo-copy small { color: var(--accent); font-weight: 700; }
+      .demo-copy strong { max-width: 430px; margin-top: 12px; font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 3.5rem); font-variation-settings: "wdth" 108; line-height: 1; }
+      .demo-copy span { width: 120px; height: 38px; margin-top: 24px; background: var(--accent); }
+      .demo-visual { display: grid; place-items: center; background: var(--fg); }
+      .demo-visual::before { width: 58%; aspect-ratio: .8; border: 10px solid #fff; background: var(--signal); content: ""; }
+      .browser[data-viewport="mobile"] .demo-page { grid-template-columns: 1fr; }
+      .browser[data-viewport="mobile"] .demo-copy { padding: 28px 22px; }
+      .browser[data-viewport="mobile"] .demo-visual { min-height: 210px; }
+      .annotation { display: grid; margin-top: 16px; grid-template-columns: 1fr auto; gap: 20px; color: var(--muted); font-size: var(--text-sm); }
+      .annotation code { color: var(--fg); font-family: var(--font-utility); font-size: var(--text-xs); }
+      .services { padding: var(--section-y-desktop) 0; border-top: 1px solid var(--border); background: var(--surface); }
+      .services h2 { margin-bottom: 44px; font-size: var(--text-3xl); line-height: 1.02; }
+      .service-list { border-top: 1px solid var(--border); }
+      .service-row { display: grid; width: 100%; min-height: 88px; padding: 18px 0; align-items: center; grid-template-columns: minmax(180px,.55fr) 1fr auto; gap: 28px; border: 0; border-bottom: 1px solid var(--border); background: transparent; text-align: left; }
+      .service-row strong { font-family: var(--font-display); font-size: var(--text-xl); font-variation-settings: "wdth" 105; }
+      .service-row span { color: var(--muted); }
+      .service-row b { color: var(--accent); transition: transform var(--motion-fast) var(--ease-standard); }
+      .service-row:hover b, .service-row[aria-expanded="true"] b { transform: translateX(4px); }
+      .service-row[aria-expanded="true"] { background: var(--bg); }
+      .service-detail { display: none; padding: 26px 32px 32px; border-bottom: 1px solid var(--border); background: var(--bg); }
+      .service-detail.is-open { display: grid; grid-template-columns: .7fr 1.3fr; gap: 36px; }
+      .service-detail p { max-width: 580px; margin: 0; color: var(--fg-2); }
+      .service-detail code { color: var(--accent); font-family: var(--font-utility); font-size: var(--text-xs); }
+      footer { padding: 48px 0; background: var(--fg); color: #fff; }
+      footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      footer p { margin: 0; }
+      @media (max-width: 860px) {
+        .shell { width: min(100% - 36px, var(--container-max)); }
+        .layout { grid-template-columns: 1fr; gap: 30px; }
+        .rail { display: flex; justify-content: space-between; gap: 20px; }
+        .workbench-head { align-items: start; flex-direction: column; }
+        .stage { min-height: 480px; padding: 28px; }
+        .browser[data-viewport="tablet"] { width: 84%; }
+      }
+      @media (max-width: 620px) {
+        .shell { width: calc(100% - 32px); }
+        .header nav > a:not(.button) { display: none; }
+        .hero { padding-top: 64px; }
+        .actions { align-items: stretch; flex-direction: column; }
+        .stage { min-height: 420px; margin-inline: -16px; padding: 18px; }
+        .browser[data-viewport="tablet"] { width: 88%; }
+        .browser[data-viewport="mobile"] { width: 70%; }
+        .demo-page { grid-template-columns: 1fr; }
+        .demo-visual { min-height: 190px; }
+        .service-row { grid-template-columns: 1fr auto; gap: 12px; }
+        .service-row span { grid-column: 1 / -1; grid-row: 2; }
+        .service-detail.is-open { grid-template-columns: 1fr; gap: 12px; }
+        .annotation { grid-template-columns: 1fr; }
+        footer .shell { align-items: start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { transition-duration: 0ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top">Jaymark Tauto-an</a>
+        <nav aria-label="Primary navigation">
+          <a href="#work">Selected work</a>
+          <a href="#services">Capabilities</a>
+          <a class="button button-primary" href="mailto:hello@example.com">Start a conversation <span class="arrow">→</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="shell layout">
+          <aside class="rail"><strong>Available for focused builds</strong><span>WordPress · Cebu / remote</span></aside>
+          <div>
+            <div class="hero-copy">
+              <p class="eyebrow">WordPress development and digital marketing</p>
+              <h1>I build websites around the job they need to do.</h1>
+              <p class="lede">Responsive business sites, WooCommerce stores, membership experiences, and practical SEO foundations—explained clearly and built with care.</p>
+              <div class="actions">
+                <a class="button button-primary" href="#work">View selected work <span class="arrow">→</span></a>
+                <a class="button" href="#services">See capabilities</a>
+              </div>
+            </div>
+            <section class="workbench" id="work" aria-labelledby="work-title">
+              <div class="workbench-head">
+                <div><p class="eyebrow">Responsive build study</p><h2 id="work-title">One page, three useful views.</h2></div>
+                <div class="viewport-controls" aria-label="Preview viewport">
+                  <button class="viewport-control" type="button" data-view="desktop" aria-pressed="true">Desktop</button>
+                  <button class="viewport-control" type="button" data-view="tablet" aria-pressed="false">Tablet</button>
+                  <button class="viewport-control" type="button" data-view="mobile" aria-pressed="false">Mobile</button>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="browser" data-viewport="desktop">
+                  <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <div class="demo-page">
+                    <div class="demo-copy"><small>Representative service-business build</small><strong>Clear paths from first visit to enquiry.</strong><span aria-hidden="true"></span></div>
+                    <div class="demo-visual" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="annotation" aria-live="polite"><span id="viewport-note">Desktop view keeps the service promise and next action visible together.</span><code id="viewport-size">1440 × 900</code></div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <section class="services" id="services">
+        <div class="shell layout">
+          <aside class="rail"><strong>Capability index</strong><span>Select a row to inspect the work.</span></aside>
+          <div>
+            <p class="eyebrow">What I can help with</p>
+            <h2>Practical capabilities, shown in context.</h2>
+            <div class="service-list">
+              <button class="service-row" type="button" aria-expanded="true" aria-controls="detail-build"><strong>WordPress builds</strong><span>Responsive implementation, content structure, and maintainable components.</span><b>→</b></button>
+              <div class="service-detail is-open" id="detail-build"><code>Typical deliverables</code><p>Page templates, reusable blocks, responsive states, performance checks, and a handoff that explains how the site is maintained.</p></div>
+              <button class="service-row" type="button" aria-expanded="false"><strong>WooCommerce</strong><span>Stores organized around the buying task rather than the plugin interface.</span><b>→</b></button>
+              <button class="service-row" type="button" aria-expanded="false"><strong>SEO foundations</strong><span>Technical and on-page improvements tied to useful, searchable content.</span><b>→</b></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer><div class="shell"><p>Have a website problem worth solving?</p><a class="button button-primary" href="mailto:hello@example.com">Start a conversation <span class="arrow">→</span></a></div></footer>
+    <script>
+      const preview = document.querySelector('.browser');
+      const note = document.querySelector('#viewport-note');
+      const size = document.querySelector('#viewport-size');
+      const viewportCopy = {
+        desktop: ['Desktop view keeps the service promise and next action visible together.', '1440 × 900'],
+        tablet: ['Tablet view reduces the split while preserving the same reading order.', '834 × 1112'],
+        mobile: ['Mobile view stacks the promise, action, and visual without hiding content.', '390 × 844']
+      };
+      document.querySelectorAll('.viewport-control').forEach((control) => {
+        control.addEventListener('click', () => {
+          document.querySelectorAll('.viewport-control').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+          control.setAttribute('aria-pressed', 'true');
+          const view = control.dataset.view;
+          preview.dataset.viewport = view;
+          [note.textContent, size.textContent] = viewportCopy[view];
+        });
+      });
+    </script>
+  </body>
+</html>

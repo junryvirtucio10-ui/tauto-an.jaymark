@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "od-design-system-project/v1",
+  "id": "jaymark-buildline-human",
+  "name": "Jaymark Buildline",
+  "category": "Brands",
+  "description": "A human, editorial working-canvas system for Jaymark's WordPress and digital-marketing portfolio, centered on real project evidence and a live responsive preview.",
+  "source": {
+    "type": "local",
+    "origin": "Human revision of the Open Design-generated Jaymark Buildline system"
+  },
+  "files": {
+    "design": "DESIGN.md",
+    "tokens": "tokens.css",
+    "components": "components.html"
+  }
+}
+

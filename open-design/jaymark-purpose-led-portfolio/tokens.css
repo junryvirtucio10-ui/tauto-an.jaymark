@@ -1,0 +1,146 @@
+:root {
+  color-scheme: light;
+
+  /* Open Design canonical contract */
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-warm: #e8f1f5;
+  --fg: #222831;
+  --fg-2: #004a7c;
+  --muted: #68717d;
+  --meta: #004a7c;
+  --border: #dcdddd;
+  --border-soft: rgba(34, 40, 49, 0.14);
+  --accent: #005691;
+  --accent-on: #fafafa;
+  --accent-hover: #004a7c;
+  --accent-active: #003a62;
+  --success: #16794d;
+  --warn: #9a6700;
+  --danger: #b42318;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+  --text-xs: 0.625rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.6875rem;
+  --text-3xl: clamp(2rem, 4.1vw, 3.4375rem);
+  --text-4xl: clamp(2.625rem, 5.2vw, 4.25rem);
+  --leading-body: 1.55;
+  --leading-tight: 0.96;
+  --section-y-desktop: 6.5625rem;
+  --section-y-tablet: 5.25rem;
+  --section-y-phone: 4.875rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.8125rem;
+  --radius-lg: 0.9375rem;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 18px 45px rgba(0, 74, 124, 0.10);
+  --focus-ring: 0 0 0 3px rgba(0, 86, 145, 0.34);
+  --motion-fast: 180ms;
+  --motion-base: 580ms;
+  --container-max: 72.5rem;
+  --container-gutter-desktop: 1.5rem;
+  --container-gutter-tablet: 1.125rem;
+  --container-gutter-phone: 0.875rem;
+
+  /* Core palette */
+  --color-canvas: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-tint: #e8f1f5;
+  --color-primary: #005691;
+  --color-primary-deep: #004a7c;
+  --color-ink: #222831;
+  --color-ink-muted: #68717d;
+  --color-border: #dcdddd;
+  --color-on-primary: #fafafa;
+  --color-on-dark: #fafafa;
+  --color-on-dark-muted: rgba(250, 250, 250, 0.67);
+
+  /* Typography */
+  --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --font-body: "DM Sans", Arial, sans-serif;
+  --font-utility: "IBM Plex Mono", Consolas, monospace;
+  --font-size-display-xl: clamp(3.75rem, 6.3vw, 5.75rem);
+  --font-size-display-lg: clamp(2.625rem, 5.2vw, 4.25rem);
+  --font-size-display-md: clamp(2rem, 4.1vw, 3.4375rem);
+  --font-size-title: 1.6875rem;
+  --font-size-card-title: 1.25rem;
+  --font-size-body-lg: 1.0625rem;
+  --font-size-body: 1rem;
+  --font-size-body-sm: 0.8125rem;
+  --font-size-control: 0.75rem;
+  --font-size-label: 0.625rem;
+  --line-height-tight: 0.96;
+  --line-height-heading: 1.08;
+  --line-height-body: 1.55;
+  --tracking-display: -0.035em;
+  --tracking-label: 0.08em;
+
+  /* Layout and spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-28: 7rem;
+  --content-max: 72.5rem;
+  --content-gutter: 1.5rem;
+
+  /* Shape and depth */
+  --radius-control: 0;
+  --radius-small: 0.5rem;
+  --radius-medium: 0.75rem;
+  --radius-card: 0.9375rem;
+  --radius-feature: 1.125rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --shadow-card: 0 9px 25px rgba(0, 74, 124, 0.04);
+  --shadow-card-hover: 0 18px 45px rgba(0, 74, 124, 0.10);
+  --shadow-elevated: 0 26px 60px rgba(0, 0, 0, 0.34);
+  --shadow-action: 0 9px 26px rgba(0, 86, 145, 0.30);
+
+  /* Motion */
+  --duration-fast: 180ms;
+  --duration-reveal: 580ms;
+  --ease-standard: ease;
+  --lift-control: -3px;
+  --lift-card: -5px;
+
+  /* Compatibility aliases used by the source portfolio */
+  --white: var(--color-canvas);
+  --winter: var(--color-surface-tint);
+  --blue: var(--color-primary);
+  --navy: var(--color-primary-deep);
+  --dark: var(--color-ink);
+  --display: var(--font-display);
+  --body: var(--font-body);
+  --mono: var(--font-utility);
+  --line: rgba(34, 40, 49, 0.14);
+}
+
+@media (max-width: 35rem) {
+  :root {
+    --content-gutter: 0.875rem;
+    --font-size-display-xl: clamp(2.8125rem, 13.9vw, 4.25rem);
+    --font-size-display-lg: 2.5625rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-reveal: 0ms;
+    --lift-control: 0;
+    --lift-card: 0;
+  }
+}

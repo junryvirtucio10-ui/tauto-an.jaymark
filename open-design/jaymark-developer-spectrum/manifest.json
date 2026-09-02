@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "od-design-system-project/v1",
+  "id": "jaymark-developer-spectrum",
+  "name": "Developer Spectrum",
+  "category": "Brands",
+  "description": "A high-contrast developer portfolio system that maps warm colors to interface craft and cool colors to systems thinking, joined by a visible build pipeline.",
+  "source": {
+    "type": "local",
+    "origin": "Created from the supplied seven-color portfolio brief"
+  },
+  "files": {
+    "design": "DESIGN.md",
+    "tokens": "tokens.css",
+    "components": "components.html"
+  }
+}

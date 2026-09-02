@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "od-design-system-project/v1",
+  "id": "jaymark-purpose-led-portfolio",
+  "name": "Jaymark Purpose-Led Portfolio",
+  "category": "Brands",
+  "description": "A precise, conversion-minded portfolio system for a WordPress developer and digital marketer, pairing deep navy editorial sections with winter-blue surfaces and direct blue actions.",
+  "source": {
+    "type": "local",
+    "origin": "Jaymark Tauto-an portfolio implementation"
+  },
+  "files": {
+    "design": "DESIGN.md",
+    "tokens": "tokens.css"
+  }
+}

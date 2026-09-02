@@ -1,0 +1,100 @@
+:root {
+  color-scheme: light;
+
+  /* Open Design contract */
+  --bg: #f4f6f7;
+  --surface: #ffffff;
+  --surface-warm: #e7edf0;
+  --fg: #151c24;
+  --fg-2: #303a45;
+  --muted: #59636f;
+  --meta: #42505d;
+  --border: #c7d0d8;
+  --border-soft: rgba(21, 28, 36, 0.14);
+  --accent: #005ea8;
+  --accent-on: #ffffff;
+  --accent-hover: #004575;
+  --accent-active: #00385f;
+  --signal: #f3b33d;
+  --success: #18794e;
+  --warn: #8f5b00;
+  --danger: #b42318;
+
+  /* Typography */
+  --font-display: "Archivo", "Arial Narrow", "Segoe UI", sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", "Segoe UI", Arial, sans-serif;
+  --font-utility: "IBM Plex Mono", Consolas, monospace;
+  --font-mono: var(--font-utility);
+  --text-xs: 0.75rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.5rem, 2vw, 2rem);
+  --text-3xl: clamp(2.25rem, 4vw, 4.25rem);
+  --text-4xl: clamp(3.4rem, 7vw, 6.6rem);
+  --leading-body: 1.65;
+  --leading-tight: 0.98;
+  --tracking-display: -0.035em;
+  --tracking-label: 0;
+
+  /* Layout */
+  --container-max: 77.5rem;
+  --container-gutter-desktop: 2rem;
+  --container-gutter-tablet: 1.5rem;
+  --container-gutter-phone: 1rem;
+  --rail-width: 12rem;
+  --section-y-desktop: 7rem;
+  --section-y-tablet: 5.5rem;
+  --section-y-phone: 4.25rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Shape and depth */
+  --radius-control: 0.25rem;
+  --radius-small: 0.375rem;
+  --radius-frame: 0.625rem;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-frame: 0 24px 70px rgba(21, 28, 36, 0.16);
+  --focus-ring: 0 0 0 3px rgba(0, 94, 168, 0.35);
+
+  /* Motion */
+  --motion-fast: 180ms;
+  --motion-detail: 220ms;
+  --motion-frame: 360ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 53.75rem) {
+  :root {
+    --rail-width: 0rem;
+    --section-y-desktop: var(--section-y-tablet);
+  }
+}
+
+@media (max-width: 38.75rem) {
+  :root {
+    --section-y-desktop: var(--section-y-phone);
+    --text-4xl: clamp(2.9rem, 14vw, 4.6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-detail: 0ms;
+    --motion-frame: 0ms;
+  }
+}
+
